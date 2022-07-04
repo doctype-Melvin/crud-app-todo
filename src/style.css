@@ -39,15 +39,30 @@ html, body {
     height: 100vh;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(100px, 150px));
-    grid-template-rows: repeat(auto-fill, minmax(100px, 110px));
+    grid-template-rows: repeat(auto-fill, minmax(100px, 130px));
     gap: 12px;
     justify-content: center;
 }
 
 .card {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-evenly;
     background-color: rgb(203, 231, 231);
     padding: 5px;
     border-radius: 5px;
+}
+
+.editContainer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.editBtn, .deleteBtn {
+    width: 20px;
+    margin-left: 10px;
+}
+
+.editBtn:hover, .deleteBtn:hover {
+    cursor: pointer;
 }

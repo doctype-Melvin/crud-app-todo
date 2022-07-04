@@ -1,3 +1,6 @@
+import Edit from './edit.png';
+import Delete from './delete.png'
+
 //////DOM Start
 const display = document.querySelector('.display'); //Section where tasks are rendered
 const controls = document.querySelector('.controls');
@@ -37,21 +40,30 @@ const makeTask = () => { //Creates object from form inpt values
 const createCard = ([task, note, date]) => {
     let card = document.createElement('div');
     card.classList.add('card');
-    let title = document.createElement('span');
-    title.classList.add('cardTitle');
-    title.textContent = task;
-    let description = document.createElement('span');
-    description.classList.add('cardNote');
-    description.textContent = note;
-    let due = document.createElement('span');
-    due.classList.add('dateNote');
-    due.textContent = date;
-    
-    card.append(title, description, due)
+        let title = document.createElement('span');
+        title.classList.add('cardTitle');
+        title.textContent = task;
+            let description = document.createElement('span');
+            description.classList.add('cardNote');
+            description.textContent = note;
+                let due = document.createElement('span');
+                due.classList.add('dateNote');
+                due.textContent = date;
+                    let edit = new Image;
+                    edit.src = Edit;
+                    edit.classList.add('editBtn');
+                        let deleteBtn = new Image;
+                        deleteBtn.src = Delete;
+                        deleteBtn.classList.add('deleteBtn');
+                            let editBtnContainer = document.createElement('div');
+                            editBtnContainer.classList.add('editContainer');
+    editBtnContainer.append(edit, deleteBtn)
+
+    card.append(title, description, due, editBtnContainer)
     return card
 }
 
-const addTaskBtn = document.querySelector('.newTaskBtn');
+const addTaskBtn = document.querySelector('.newTaskBtn'); //From button
 addTaskBtn.onclick = (e) => {
     e.preventDefault();
     addToStorage();
@@ -69,7 +81,6 @@ const readStorage = () => {
     }
 }
 readStorage()
-//tasksArray.map(item => display.append(createCard(Object.values(item))))
 
 //////DOM End
 
