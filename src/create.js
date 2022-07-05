@@ -1,6 +1,7 @@
 import Edit from './edit.png';
 import Delete from './delete.png'
 import { deleteTask } from './delete';
+import { editData } from './edit';
 
 //////DOM Start
 const display = document.querySelector('.display'); //Section where tasks are rendered
@@ -14,14 +15,14 @@ const taskModal = document.querySelector('.taskModal');
 const openForm = () => {
     document.querySelector('.taskForm').reset();
     taskModal.style.display = 'block';
-}
-button.addEventListener('click', () => {
-    openForm();
     window.onclick = function (e){
         if(e.target == taskModal){
             taskModal.style.display = 'none'
         }
     }
+}
+button.addEventListener('click', () => {
+    openForm();
 });
 
 //Form input fields
@@ -51,7 +52,7 @@ const createCard = ([task, note, date]) => {
             description.classList.add('cardNote');
             description.textContent = note;
                 let due = document.createElement('span');
-                due.classList.add('dateNote');
+                due.classList.add('cardDate');
                 due.textContent = date;
                     //Hidden index span for further task processing (deleting, editing)
                     let position = document.createElement('span');
@@ -69,7 +70,10 @@ const createCard = ([task, note, date]) => {
                     editBtnContainer.classList.add('editContainer');
                     deleteBtn.addEventListener('click', (e) => {//Delete button removes data from storage and updates UI
                         deleteTask(e);
-                        readStorage()
+                        readStorage();
+                    })
+                    edit.addEventListener('click', (e) => {
+                        editData(e)
                     })
     editBtnContainer.append(edit, deleteBtn)
 
