@@ -1,5 +1,5 @@
 import './create'
-import './read'
+import './delete'
 import './style.css'
 import Icon from './burger-icon.png'
 
