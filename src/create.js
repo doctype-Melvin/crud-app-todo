@@ -1,23 +1,31 @@
 import Edit from './edit.png';
 import Delete from './delete.png'
 import { deleteTask } from './delete';
-import { editData } from './edit';
+import { editData, editObj, replaceObj, switchBtn } from './edit';
 
 //////DOM Start
 const display = document.querySelector('.display'); //Section where tasks are rendered
 const controls = document.querySelector('.controls');
 const main = document.querySelector('.main')
 const button = document.createElement('button')
+const addTaskBtn = document.querySelector('.newTaskBtn'); //Form button
 button.textContent = 'Button'
 controls.append(button);
 
-const taskModal = document.querySelector('.taskModal');
+//Task modal for task creation
+const taskModal = document.querySelector('.taskModal'); 
 const openForm = () => {
+    if(isEdit){
+        addTaskBtn.textContent = 'OK'
+    }else{
+        addTaskBtn.textContent = 'Add task'
+    }
     document.querySelector('.taskForm').reset();
     taskModal.style.display = 'block';
     window.onclick = function (e){
         if(e.target == taskModal){
-            taskModal.style.display = 'none'
+            taskModal.style.display = 'none';
+            isEdit = false;
         }
     }
 }
@@ -37,7 +45,10 @@ const makeTask = () => { //Creates object from form input values
     newTask['date'] = date.value;
     return newTask
 }
+
+let isEdit = false;
 let index = 0//Card index
+let data
 
 //Creates the dom nodes for task cards
 const createCard = ([task, note, date]) => {
@@ -73,7 +84,11 @@ const createCard = ([task, note, date]) => {
                         readStorage();
                     })
                     edit.addEventListener('click', (e) => {
-                        editData(e)
+                        data = (editData(e).obj);
+                        index = (editData(e).index)
+                        switchBtn()
+                        isEdit = true;
+                        openForm()
                     })
     editBtnContainer.append(edit, deleteBtn)
 
@@ -81,13 +96,18 @@ const createCard = ([task, note, date]) => {
     return card
 }
 
-
-const addTaskBtn = document.querySelector('.newTaskBtn'); //Form button
 addTaskBtn.onclick = (e) => {
-    e.preventDefault();
+    if (!isEdit){
     addToStorage();
     readStorage();
-    taskModal.style.display = 'none'
+} else {//open form and update local storage data
+    editObj(data);
+    replaceObj(data, index)
+    readStorage()
+}
+    e.preventDefault();
+    taskModal.style.display = 'none';
+    isEdit = false;
 }
 
 const readStorage = () => {//Removes all cards and appends them anew
