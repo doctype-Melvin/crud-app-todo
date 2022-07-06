@@ -25,13 +25,21 @@ export const switchBtn = () => { //Changes button text
 }
 
 export const editObj = (obj) => {
+    //Form input fields values
     let task = document.getElementById('task').value;
     let note = document.getElementById('note').value;
     let date = document.getElementById('date').value;
-    //If there is no input keep the old data 
-    obj['task'] = task;
-    obj['note'] = note;
-    obj['date'] = date;
+
+    //Old object values
+    let oldTask = obj['task'];
+    let oldNote = obj['note'];
+    let oldDate = obj['date'];
+    
+    //Tests for existance of old values
+    (task == '' && oldTask != '') ? obj['task'] = oldTask : obj['task'] = task;
+    (note == '' && oldNote != '') ? obj['note'] = oldNote : obj['note'] = note;
+    (date == '' && oldDate != '') ? obj['date'] = oldDate : obj['date'] = date;
+
     return obj
 }
 
