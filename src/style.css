@@ -12,6 +12,29 @@ html, body {
     height: 100vh;
 }
 
+.sidebar {
+    height: 100vh;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(255, 255, 255);
+    overflow-x: hidden;
+    padding-top: 10px;
+    transition: 0.3s;
+}
+
+.sidebar .closeBtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 40px;
+    margin-left: 50px;
+    text-decoration: none;
+    color: black;
+}
+
 .projectModal, .taskModal {
     display: none;
     position: fixed;
@@ -35,22 +58,42 @@ html, body {
     cursor: pointer;
 }
 
+.addButtons {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 30px;
+}
+
 .display {
     height: 100vh;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 150px));
-    grid-template-rows: repeat(auto-fill, minmax(100px, 130px));
+    grid-template-columns: repeat(auto-fill, minmax(100px, 40vw));
+    grid-template-rows: repeat(auto-fill, minmax(100px, 180px));
     gap: 12px;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
 .card {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    background-color: rgb(203, 231, 231);
+    background-color: rgb(231, 227, 227);
     padding: 5px;
     border-radius: 5px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+.cardTitle {
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.cardNote {
+    font-size: 0.85rem;
+}
+
+.cardDate {
+    font-size: 0.75rem;
 }
 
 .editContainer {
@@ -64,5 +107,24 @@ html, body {
 }
 
 .editBtn:hover, .deleteBtn:hover {
+    cursor: pointer;
+}
+
+/* Projects */
+.projectsTitle {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.projectsTitle, .tabContainer {
+    margin-left: 10px
+}
+
+.tabContainer div {
+    margin-bottom: 10px;
+}
+
+.tabContainer div:hover {
     cursor: pointer;
 }

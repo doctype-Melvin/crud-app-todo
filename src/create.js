@@ -2,15 +2,40 @@ import Edit from './edit.png';
 import Delete from './delete.png'
 import { deleteTask } from './delete';
 import { editData, editObj, replaceObj, switchBtn } from './edit';
+import Icon from './burger-icon.png'
 
 //////DOM Start
 const display = document.querySelector('.display'); //Section where tasks are rendered
+export const sidebar = document.querySelector('.sidebar');
 const controls = document.querySelector('.controls');
+export const buttons = document.createElement('div');
+buttons.classList.add('addButtons');
 const main = document.querySelector('.main')
-const button = document.createElement('button')
+const newTask = document.createElement('button')
+const closeBtn = document.querySelector('.closeBtn');
 const addTaskBtn = document.querySelector('.newTaskBtn'); //Form button
-button.textContent = 'Button'
-controls.append(button);
+newTask.textContent = 'New task'
+const burgerMenu = () => { //creates the burger menu icon
+    let icon = new Image();
+    icon.classList.add('burgerMenu')
+    icon.src = Icon;
+    return {
+        icon
+    }
+}
+const burgerBtn = burgerMenu().icon
+buttons.append(newTask);
+controls.append(burgerBtn, buttons);
+
+const openSb = () => {
+    sidebar.style.width = '100vw';
+}
+const closeSb = () => {
+    sidebar.style.width = '0';
+}
+
+burgerBtn.addEventListener('click', () => openSb())
+closeBtn.addEventListener('click', () => closeSb())
 
 //Task modal for task creation
 const taskModal = document.querySelector('.taskModal'); 
@@ -29,7 +54,7 @@ const openForm = () => {
         }
     }
 }
-button.addEventListener('click', () => {
+newTask.addEventListener('click', () => {
     openForm();
 });
 
