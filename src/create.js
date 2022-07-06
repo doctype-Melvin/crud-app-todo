@@ -5,15 +5,15 @@ import { editData, editObj, replaceObj, switchBtn } from './edit';
 import Icon from './burger-icon.png'
 
 //////DOM Start
-const display = document.querySelector('.display'); //Section where tasks are rendered
+export const display = document.querySelector('.display'); //Section where tasks are rendered
 export const sidebar = document.querySelector('.sidebar');
 const controls = document.querySelector('.controls');
 export const buttons = document.createElement('div');
 buttons.classList.add('addButtons');
 const main = document.querySelector('.main')
-const newTask = document.createElement('button')
+export const newTask = document.createElement('button')
 const closeBtn = document.querySelector('.closeBtn');
-const addTaskBtn = document.querySelector('.newTaskBtn'); //Form button
+export const addTaskBtn = document.querySelector('.newTaskBtn'); //Form button
 newTask.textContent = 'New task'
 const burgerMenu = () => { //creates the burger menu icon
     let icon = new Image();
@@ -30,7 +30,7 @@ controls.append(burgerBtn, buttons);
 const openSb = () => {
     sidebar.style.width = '100vw';
 }
-const closeSb = () => {
+export const closeSb = () => {
     sidebar.style.width = '0';
 }
 
@@ -38,8 +38,8 @@ burgerBtn.addEventListener('click', () => openSb())
 closeBtn.addEventListener('click', () => closeSb())
 
 //Task modal for task creation
-const taskModal = document.querySelector('.taskModal'); 
-const openForm = () => {
+export const taskModal = document.querySelector('.taskModal'); 
+export const openForm = () => {
     if(isEdit){
         addTaskBtn.textContent = 'OK'
     }else{
@@ -63,7 +63,7 @@ const task = document.querySelector('#task');
 const note = document.querySelector('#note');
 const date = document.querySelector('#date');
 
-const makeTask = () => { //Creates object from form input values
+export const makeTask = () => { //Creates object from form input values
     let newTask = {};
     newTask['task'] = task.value;
     newTask['note'] = note.value;
@@ -76,7 +76,7 @@ let index = 0//Card index
 let data
 
 //Creates the dom nodes for task cards
-const createCard = ([task, note, date]) => {
+export const createCard = ([task, note, date]) => {
     //Task details
     index++ //Each card gets an incremented index
     let card = document.createElement('div');
@@ -114,6 +114,8 @@ const createCard = ([task, note, date]) => {
                         switchBtn()
                         isEdit = true;
                         openForm()
+//In the projects view the edit buttons behave sus
+//
                     })
     editBtnContainer.append(edit, deleteBtn)
 

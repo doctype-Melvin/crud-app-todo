@@ -1,4 +1,4 @@
-import { buttons, sidebar } from "./create";
+import { addTaskBtn, buttons, closeSb, display, makeTask, newTask, openForm, sidebar, createCard } from "./create";
 
 //Create projects array in local storage
 const createProjectArr = () => {
@@ -75,3 +75,80 @@ const renderStorage = () => {//Removes all cards and appends them anew
 }
 renderStorage()
 newProject.addEventListener('click', () => openProjectForm())
+
+//Accesses project's title and toDo source
+let source //ToDo array
+let object //Title
+const accessObj = (e) => {
+    let title = e.target.textContent;
+    let source = JSON.parse(localStorage.getItem('projects')).filter(item => title == item.title)[0].toDo;
+    return {source, title}
+}
+//Creates nodelist of project links and adds eventlisteners
+const projectTabs = document.querySelectorAll('.projectLink');
+projectTabs.forEach(link => link.addEventListener('click', (e) => {
+    closeSb();
+   source = accessObj(e).source;
+   object = accessObj(e).title
+    clearDisplay()
+    readStorage()
+}))
+//Single button in projects view to add new task
+const newTaskBtn = document.createElement('button');
+newTaskBtn.classList.add('projectTaskBtn');
+newTaskBtn.textContent = 'New task';
+
+//Renders the project tab view
+const clearDisplay = () => {
+    while (display.firstChild){
+        display.removeChild(display.lastChild)
+    }
+    newProject.style.display = 'none';
+    newTask.style.display = 'none';
+    buttons.append(newTaskBtn)
+}
+
+//Replaces button on form
+const replaceSubmitBtn = () => {
+    addTaskBtn.style.display = 'none';
+    const formTaskBtn = document.createElement('button');
+    formTaskBtn.classList.add('btn');
+    formTaskBtn.textContent = 'Add task';
+    document.querySelector('.taskForm').append(formTaskBtn);
+    return {
+        formTaskBtn
+    }
+}
+
+// Updates toDo array and localStorage
+replaceSubmitBtn().formTaskBtn.addEventListener('click', (e) => {
+    e.preventDefault()
+    let oldData = JSON.parse(localStorage.getItem('projects'));
+    let newData = pushToArray(source).array;
+    oldData.filter(item => item.title == object)[0].toDo = newData;
+    localStorage.setItem('projects', JSON.stringify(oldData));
+})
+
+//Opens task form
+newTaskBtn.addEventListener('click', () => {
+    openForm();
+})
+
+//Pushes new task to toDo array
+const pushToArray = (input) => {
+    let newTask = makeTask();
+    let array = input
+    array.push(newTask);
+    return {array}
+}
+
+const readStorage = () => {//Removes all cards and appends them anew
+    const tasksArray = source
+    if (tasksArray != null){
+        while (display.firstChild) { //remove all appended tasks
+            display.removeChild(display.lastChild);
+            //index = 0
+        }
+        tasksArray.map(item => display.append(createCard(Object.values(item))))
+    }
+}
