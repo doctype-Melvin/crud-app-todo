@@ -4,6 +4,7 @@ import { deleteTask } from './delete';
 import { editData, editObj, replaceObj, switchBtn } from './edit';
 import Icon from './burger-icon.png'
 
+
 //////DOM Start
 export const display = document.querySelector('.display'); //Section where tasks are rendered
 export const sidebar = document.querySelector('.sidebar');
@@ -33,6 +34,18 @@ const openSb = () => {
 export const closeSb = () => {
     sidebar.style.width = '0';
 }
+
+//Misc Tasks button in sidebar
+const miscTasks = document.createElement('div');
+miscTasks.classList.add('miscTasks');
+miscTasks.textContent = 'Misc Tasks';
+sidebar.append(miscTasks)
+miscTasks.addEventListener('click', () => {
+    console.log('misc tasks');
+    closeSb();
+    readStorage()
+})
+
 
 burgerBtn.addEventListener('click', () => openSb())
 closeBtn.addEventListener('click', () => closeSb())
@@ -148,6 +161,8 @@ const readStorage = () => {//Removes all cards and appends them anew
     }
 }
 readStorage()
+
+
 
 //////DOM End
 

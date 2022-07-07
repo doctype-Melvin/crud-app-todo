@@ -111,13 +111,17 @@ html, body {
 }
 
 /* Projects */
-.projectsTitle {
+.miscTasks:hover {
+    cursor: pointer;
+}
+
+.projectsTitle, .miscTasks {
     font-size: 1.75rem;
     font-weight: 600;
     margin-bottom: 10px;
 }
 
-.projectsTitle, .tabContainer {
+.projectsTitle, .tabContainer, .miscTasks {
     margin-left: 10px
 }
 

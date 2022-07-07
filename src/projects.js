@@ -38,6 +38,8 @@ const makeProject = () => {
     newObject['toDo'] = [];
     return newObject
 }
+
+//Sidebar elements
 const tabContainer = document.createElement('div');
 tabContainer.classList.add('tabContainer');
 const projectsTitle = document.createElement('div');
