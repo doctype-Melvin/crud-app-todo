@@ -35,16 +35,15 @@ export const closeSb = () => {
     sidebar.style.width = '0';
 }
 
-//Misc Tasks button in sidebar
-const miscTasks = document.createElement('div');
-miscTasks.classList.add('miscTasks');
-miscTasks.textContent = 'Misc Tasks';
-sidebar.append(miscTasks)
-miscTasks.addEventListener('click', () => {
-    console.log('misc tasks');
-    closeSb();
-    readStorage()
-})
+// //Misc Tasks button in sidebar
+// const miscTasks = document.createElement('div');
+// miscTasks.classList.add('miscTasks');
+// miscTasks.textContent = 'Misc Tasks';
+// sidebar.append(miscTasks)
+// miscTasks.addEventListener('click', () => {
+//     console.log('misc tasks');
+//     closeSb();
+// })
 
 
 burgerBtn.addEventListener('click', () => openSb())
@@ -150,7 +149,7 @@ addTaskBtn.onclick = (e) => {
     isEdit = false;
 }
 
-const readStorage = () => {//Removes all cards and appends them anew
+export const readStorage = () => {//Removes all cards and appends them anew
     const tasksArray = JSON.parse(localStorage.getItem('tasks'))
     if (tasksArray != null){
         while (display.firstChild) { //remove all appended tasks

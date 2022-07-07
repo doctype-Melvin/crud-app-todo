@@ -1,4 +1,4 @@
-import { addTaskBtn, buttons, closeSb, display, makeTask, newTask, openForm, sidebar, createCard } from "./create";
+import { addTaskBtn, buttons, closeSb, display, makeTask, newTask, openForm, sidebar, createCard, readStorage } from "./create";
 
 //Create projects array in local storage
 const createProjectArr = () => {
@@ -45,15 +45,38 @@ tabContainer.classList.add('tabContainer');
 const projectsTitle = document.createElement('div');
 projectsTitle.classList.add('projectsTitle');
 projectsTitle.textContent = 'Projects';
-sidebar.append(projectsTitle, tabContainer);
 
 //Create tab in sidebar
 const makeTab = (title) => {
-    let element = document.createElement('div');
-    element.classList.add('projectLink');
-    element.textContent = title;
-    return element
+    const projectEdit = document.createElement('div');
+    projectEdit.classList.add('projectEdit');
+    const proEditBtn = document.createElement('button');
+    const proDeleteBtn = document.createElement('button');
+    proEditBtn.classList.add('proEdit');
+    proDeleteBtn.classList.add('proEdit');
+    proEditBtn.textContent = 'Edit';
+    proDeleteBtn.textContent = 'Delete';
+    projectEdit.append(proEditBtn, proDeleteBtn);
+        let element = document.createElement('div');
+        element.classList.add('projectLink');
+        element.textContent = title;
+            let project = document.createElement('div');
+            project.classList.add('projectContainer')
+            project.style.display = 'flex'
+            project.append(element, projectEdit)
+    return project
 }
+
+//Misc Tasks button in sidebar
+const miscTasks = document.createElement('div');
+miscTasks.classList.add('miscTasks');
+miscTasks.textContent = 'Misc Tasks';
+sidebar.append(miscTasks, projectsTitle, tabContainer)
+miscTasks.addEventListener('click', () => {
+    console.log('misc tasks');
+    closeSb();
+    readStorage()
+})
 
 //Add project to local storage
 const addProject = document.querySelector('.newProjectBtn');
@@ -93,12 +116,12 @@ projectTabs.forEach(link => link.addEventListener('click', (e) => {
    source = accessObj(e).source;
    object = accessObj(e).title
     clearDisplay()
-    readStorage()
+    readProStorage()
 }))
 //Single button in projects view to add new task
-const newTaskBtn = document.createElement('button');
+export const newTaskBtn = document.createElement('button');
 newTaskBtn.classList.add('projectTaskBtn');
-newTaskBtn.textContent = 'New task';
+newTaskBtn.textContent = 'New task*';
 
 //Renders the project tab view
 const clearDisplay = () => {
@@ -115,7 +138,7 @@ const replaceSubmitBtn = () => {
     addTaskBtn.style.display = 'none';
     const formTaskBtn = document.createElement('button');
     formTaskBtn.classList.add('btn');
-    formTaskBtn.textContent = 'Add task';
+    formTaskBtn.textContent = 'Add task*';
     document.querySelector('.taskForm').append(formTaskBtn);
     return {
         formTaskBtn
@@ -129,6 +152,7 @@ replaceSubmitBtn().formTaskBtn.addEventListener('click', (e) => {
     let newData = pushToArray(source).array;
     oldData.filter(item => item.title == object)[0].toDo = newData;
     localStorage.setItem('projects', JSON.stringify(oldData));
+    renderStorage()
 })
 
 //Opens task form
@@ -144,7 +168,7 @@ const pushToArray = (input) => {
     return {array}
 }
 
-const readStorage = () => {//Removes all cards and appends them anew
+const readProStorage = () => {//Removes all cards and appends them anew
     const tasksArray = source
     if (tasksArray != null){
         while (display.firstChild) { //remove all appended tasks
