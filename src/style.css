@@ -6,129 +6,38 @@ html, body {
     padding: 0;
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
+    height: 100vh;
 }
 
 .container {
     height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-areas:
+    "header header header header"
+    "sidebar sidebar sidebar sidebar" 
+    "main main main main"
+    "footer footer footer footer";
+}
+
+.header {
+    grid-area: header;
+    background-color: rgb(250, 250, 100);
 }
 
 .sidebar {
-    height: 100vh;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: rgb(255, 255, 255);
-    overflow-x: hidden;
-    padding-top: 10px;
-    transition: 0.3s;
+    grid-area: sidebar;
+    background-color: rgb(165, 165, 255);
 }
 
-.sidebar .closeBtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 40px;
-    margin-left: 50px;
-    text-decoration: none;
-    color: black;
+.main {
+    grid-area: main;
+    background-color: rgb(216, 84, 84);
+    min-height: 100vh;
 }
 
-.projectModal, .taskModal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.3);
-}
-
-.projectForm, .taskForm {
-    margin: 35% auto;
-    padding: 20px;
-    width: 100%;
-    background-color: #fefefe;
-}
-
-.burgerMenu:hover {
-    cursor: pointer;
-}
-
-.addButtons {
-    display: flex;
-    justify-content: space-evenly;
-    margin-bottom: 30px;
-}
-
-.display {
-    height: 100vh;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 40vw));
-    grid-template-rows: repeat(auto-fill, minmax(100px, 180px));
-    gap: 12px;
-    justify-content: space-evenly;
-}
-
-.card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    background-color: rgb(231, 227, 227);
-    padding: 5px;
-    border-radius: 5px;
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
-}
-
-.cardTitle {
-    font-size: 0.95rem;
-    font-weight: 600;
-}
-
-.cardNote {
-    font-size: 0.85rem;
-}
-
-.cardDate {
-    font-size: 0.75rem;
-}
-
-.editContainer {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.editBtn, .deleteBtn {
-    width: 20px;
-    margin-left: 10px;
-}
-
-.editBtn:hover, .deleteBtn:hover {
-    cursor: pointer;
-}
-
-/* Projects */
-.miscTasks:hover {
-    cursor: pointer;
-}
-
-.projectsTitle, .miscTasks {
-    font-size: 1.75rem;
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-
-.projectsTitle, .tabContainer, .miscTasks {
-    margin-left: 10px
-}
-
-.tabContainer div {
-    margin-bottom: 10px;
-}
-
-.tabContainer div:hover {
-    cursor: pointer;
+.footer {
+    grid-area: footer;
+    background-color: blanchedalmond;
 }

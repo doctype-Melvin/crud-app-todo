@@ -4,43 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To Do</title>
+    <title>My Workout Pal</title>
 </head>
 <body>
     <div class="container">
+        <div class="header">Header</div>
         <div class="sidebar">
-            <a href="javascript:void(0)" class="closeBtn">&times;</a>
-        </div>
-        <div class="main">
-            <div class="controls">
+            <div class="buttons">
+                <button class="musclegroup" id="chest">Chest</button>
+                <button class="musclegroup" id="back">Back</button>
+                <button class="musclegroup" id="legs">Legs</button>
+                <button class="musclegroup" id="arms">Arms</button>
+                <button class="musclegroup" id="shoulders">Shoulders</button>
             </div>
-            <div class="display"></div>
         </div>
-            <div class="projectModal">
-                <form class="projectForm">
-                    <label for="title">Title
-                        <input type="text" name="title" id="title" autocomplete="off">
-                    </label>Description
-                    <label for="description">
-                        <input type="text" name="description" id="description" autocomplete="off">
-                    </label>
-                    <button class="newProjectBtn">Add Project</button>
-                </form>
-            </div>
-                <div class="taskModal">
-                    <form class="taskForm" id="taskForm">
-                        <label for="task">Task
-                            <input type="text" name="task" id="task" autocomplete="off">
-                        </label>Note
-                        <label for="note">
-                        <input type="text" name="note" id="note" autocomplete="off">
-                    </label>Date
-                        <label for="date">
-                            <input type="date" name="date" id="date">
-                        </label>
-                        <button class="newTaskBtn">Add Task</button>
-                    </form>
-                </div>
+        <div class="main">Main</div>
+        <div class="footer">Footer</div>
     </div>
 </body>
 </html>
