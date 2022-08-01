@@ -4,7 +4,7 @@ document.querySelectorAll('.musclegroup').forEach((btn) =>
   })
 )
 
-const exercises = [] // Stores excercises sorted by musclegroup
+// const exercises = [] // Stores excercises sorted by musclegroup
 
 const createStorage = (() => {
   if (JSON.parse(localStorage.getItem('exercises')) === null) {
