@@ -31,6 +31,10 @@ html, body {
     background-color: rgb(165, 165, 255);
 }
 
+.burger:hover {
+    cursor: pointer;
+}
+
 .buttons {
     display: none;
 }

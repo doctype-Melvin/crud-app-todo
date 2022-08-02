@@ -4,8 +4,6 @@ document.querySelectorAll('.musclegroup').forEach((btn) =>
   })
 )
 
-// const exercises = [] // Stores excercises sorted by musclegroup
-
 const createStorage = (() => {
   if (JSON.parse(localStorage.getItem('exercises')) === null) {
     return localStorage.setItem('exercises', JSON.stringify([]))
@@ -19,28 +17,30 @@ function createBodypart (muscle) { // Creates new bodypart obj
   return newObj
 }
 
-function addExercise (name, muscle) {
+function createExercise (name, muscle) {
   const data = JSON.parse(localStorage.getItem('exercises'))
-  if (data.length > 0) {
-    const index = data.findIndex(item => item.muscle === muscle)
-    const muscleObj = data.find(item => item.muscle === muscle)
-    const exArray = muscleObj.exercise
-    if (muscleObj.exercise.includes(name)) {
-      console.log(`${name} already exists`)
-      return data
-    }
-    exArray.push(name)
-    muscleObj.exercise = exArray
-    data.splice(index, 1, muscleObj)
-    localStorage.setItem('exercises', JSON.stringify(data))
-    return data
-  } else if (!data.includes(item => item.muscle === muscle)) {
+  const found = data.find(item => item.muscle === muscle)
+  if (found === undefined) { // Create new muscle obj in data
     const newObj = createBodypart(muscle)
     newObj.exercise.push(name)
     data.push(newObj)
     localStorage.setItem('exercises', JSON.stringify(data))
+    console.log(`New data for ${muscle}`)
     return data
+  } else { // Add new exercise to obj array
+    const index = data.findIndex(item => item.muscle === muscle)
+    const array = found.exercise
+    if (found.exercise.includes(name)) { // Check if exercise already exists
+      return 'Already exists'
+    } else {
+      array.push(name)
+      found.exercise = array
+      data.splice(index, 1, found)
+      localStorage.setItem('exercises', JSON.stringify(data))
+      return data
+    }
   }
 }
-
-console.log(addExercise('Dips', 'chest'))
+createExercise('Squats', 'legs')
+createExercise('Push Ups', 'chest')
+createExercise('Rows', 'back')
