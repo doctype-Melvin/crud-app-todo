@@ -57,6 +57,10 @@ html, body {
     cursor: pointer;
 }
 
+.buttons button:active {
+    border-bottom: rgb(165, 165, 255) 2px solid;
+}
+
 .main {
     grid-area: main;
     background-color: rgb(216, 84, 84);
