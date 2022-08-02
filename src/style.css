@@ -29,14 +29,32 @@ html, body {
 .sidebar {
     grid-area: sidebar;
     background-color: rgb(165, 165, 255);
+    width: 100vw;
+    display: flex;
+    justify-content: space-around;
 }
 
-.burger:hover {
-    cursor: pointer;
+.header, .buttons, .footer {
+    padding: 10px 5px;
 }
 
 .buttons {
-    display: none;
+    display: block;
+    width: 100vw;
+    overflow: auto;
+    white-space: nowrap;
+}
+
+.buttons button {
+    width: 80px;
+    background-color:rgb(165, 165, 255);
+    border: none;
+    border-bottom: rgb(165, 165, 255) 2px solid;
+}
+
+.buttons button:hover {
+    border-bottom: black 2px solid;
+    cursor: pointer;
 }
 
 .main {
@@ -48,4 +66,14 @@ html, body {
 .footer {
     grid-area: footer;
     background-color: blanchedalmond;
+    text-align: center;
+}
+
+.footer a {
+    text-decoration: none;
+    color: black;
+}
+
+.footer a:hover {
+    cursor: pointer;
 }
